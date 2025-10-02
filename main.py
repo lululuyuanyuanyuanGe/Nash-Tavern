@@ -12,4 +12,4 @@ async def main():
 
 if __name__ == "__main__":
     history = asyncio.run(main())
-    print(history.structured_output)
+    print(history.structured_output
