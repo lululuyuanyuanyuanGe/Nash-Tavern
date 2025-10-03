@@ -2,19 +2,28 @@ from browser_use import Agent, Browser, ChatGoogle
 from dotenv import load_dotenv
 import asyncio
 from schema import JobPosting
+import os
 
 load_dotenv()
 
 gemini_flash = ChatGoogle(model = "gemini-flash-latest")
-lubrowser = Browser(executable_path = "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
-                    user_data_dir='C:\\Users\\yj200\\AppData\\Local\\Google\\Chrome\\User Data',
-                    profile_directory='Profile 1',)
+
+# Your automation profile (empty folder you just created)
+automation_dir = os.path.join(os.getcwd(), "chrome-automation")
+
+lubrowser = Browser(
+    executable_path="C:\\Users\\yj200\\AppData\\Local\\Google\\Chrome\\Application\\Chrome.exe",
+    user_data_dir=automation_dir,
+    profile_directory='Default',
+    headless=False  # Important: Keep visible so you can log in
+)
 
 async def call_agent(job_url: str):
     agent = Agent(task= f"""
         Go to this job posting URL: {job_url}
         Extract the job description, job requirement, job title, location, employment type
         return these information in json format
+        if you encounter any login requirements, try to login with google account
         """,
         llm = gemini_flash,
         calculate_cost = True,

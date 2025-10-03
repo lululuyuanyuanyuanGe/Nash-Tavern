@@ -1,2 +1,5 @@
 .venv
 .env
+test.py
+identity.txt
+chrome-automation/
