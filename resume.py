@@ -17,4 +17,11 @@ def empower_resume(input: str = ""):
     resume_builder_system_prompt = """This prompt should be filled later, that will guide the LLM to become a resume builer
                                       to enrich the resume and make a better fit based on the current applying role"""
     
+
+def resume_generator():
+    """
+    This function will create the new resume based on the modification from the empower_resume,
+    it will format the resume as well and output a pdf file
+    """
     
+    pass

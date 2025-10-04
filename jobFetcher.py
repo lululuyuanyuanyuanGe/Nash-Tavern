@@ -15,19 +15,19 @@ lubrowser = Browser(
     executable_path="C:\\Users\\yj200\\AppData\\Local\\Google\\Chrome\\Application\\Chrome.exe",
     user_data_dir=automation_dir,
     profile_directory='Default',
-    headless=False  # Important: Keep visible so you can log in
+    headless=False
 )
 
 async def call_agent(job_url: str):
     agent = Agent(task= f"""
         Go to this job posting URL: {job_url}
-        Extract the job description, job requirement, job title, location, employment type
-        return these information in json format
-        if you encounter any login requirements, try to login with google account
+        Extract the job detail for me. the output should be in pure json format, inclduing job title,
+        location, job descriotion, job requirement
         """,
         llm = gemini_flash,
         calculate_cost = True,
-        browser = lubrowser)
+        browser = lubrowser,
+        output_model_schema=JobPosting)
     output = await agent.run()
     print("=======================")
     print(output)
