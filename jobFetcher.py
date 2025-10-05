@@ -66,3 +66,5 @@ async def main():
             print(f"{idx}: {job_data}")  # Use f-string
 if __name__ == "__main__":
     asyncio.run(main())
+
+    print(ASDA)
